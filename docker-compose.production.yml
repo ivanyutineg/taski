@@ -10,11 +10,13 @@ services:
     env_file: .env
     volumes:
       - pg_data_production:/var/lib/postgresql/data
+    restart: unless-stopped
   backend:
     image: eivanutin/taski_backend # Качаем с Docker Hub
     env_file: .env
     volumes:
       - static_volume:/backend_static
+    restart: unless-stopped
   frontend:
     image: eivanutin/taski_frontend  # Качаем с Docker Hub
     env_file: .env
@@ -28,3 +30,4 @@ services:
       - static_volume:/staticfiles/
     ports:
       - 8000:80
+    restart: unless-stopped
